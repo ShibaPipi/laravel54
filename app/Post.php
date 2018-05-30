@@ -8,7 +8,7 @@ use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    use Searchable;
+    //use Searchable;
 
     /*
      * 搜索的type
@@ -36,7 +36,7 @@ class Post extends Model
     //  评论模型
     public function comments()
     {
-        return $this->hasMany('App\comment')->orderBy('created_at', 'desc');
+        return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
     }
 
     //  赞和用户进行关联
