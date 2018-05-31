@@ -79,7 +79,8 @@ class PostController extends Controller
     {
         $this->authorize('delete', $post);
 
-        $post->delete();
+        $post->status = -1;
+        $post->save();
 
         return redirect('posts');
     }
