@@ -28,12 +28,13 @@ Route::post('/login', '\App\Http\Controllers\LoginController@login');
 //  登出行为
 Route::get('/logout', '\App\Http\Controllers\LoginController@logout');
 
+//  文章列表
+Route::get('/posts', '\App\Http\Controllers\PostController@index');
+//  文章详情
+Route::get('/posts/{post}', '\App\Http\Controllers\PostController@show')->where('post', '[0-9]+');
+
 Route::group(['middleware' => 'auth:web'], function() {
 
-//  文章列表
-    Route::get('/posts', '\App\Http\Controllers\PostController@index');
-//  文章详情
-    Route::get('/posts/{post}', '\App\Http\Controllers\PostController@show')->where('post', '[0-9]+');
 //  创建文章
     Route::get('/posts/create', '\App\Http\Controllers\PostController@create');
     Route::post('/posts', '\App\Http\Controllers\PostController@store');
