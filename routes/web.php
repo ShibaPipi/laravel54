@@ -33,10 +33,6 @@ Route::get('/posts', '\App\Http\Controllers\PostController@index');
 //  文章详情
 Route::get('/posts/{post}', '\App\Http\Controllers\PostController@show')->where('post', '[0-9]+');
 
-// 专题
-Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
-Route::get('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
-
 Route::group(['middleware' => 'auth:web'], function() {
 
 //  创建文章
@@ -65,6 +61,10 @@ Route::group(['middleware' => 'auth:web'], function() {
 // 个人设置
     Route::get('/user/me/setting', '\App\Http\Controllers\UserController@setting');
     Route::post('/user/me/setting', '\App\Http\Controllers\UserController@settingStore');
+
+// 专题
+    Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
+    Route::get('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
 
     // 通知
     Route::get('/notices', '\App\Http\Controllers\NoticeController@index');
