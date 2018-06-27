@@ -15,7 +15,7 @@
                     <input name="query" type="text" value="@if(!empty($query)){{$query}}@endif" class="form-control" style="margin-top:10px" placeholder="搜索词">
                 </li>
                 <li>
-                    <button class="btn btn-default" style="margin-top:10px" type="submit" disabled>Go!</button>
+                    <button class="btn btn-default" style="margin-top:10px" type="submit">Go!</button>
                 </li>
             </ul>
 
