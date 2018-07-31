@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', '\App\Http\Controllers\IndexController@index');
 
 //  用户模块
 //  注册页面
