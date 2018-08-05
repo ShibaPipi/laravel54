@@ -1,51 +1,46 @@
-@extends('layout.main')
+@extends('layout.index')
 
 @section('content')
-    <div class="col-sm-8 blog-main">
-        <div>
-            <div id="carousel-example" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example" data-slide-to="1"></li>
-                    <li data-target="#carousel-example" data-slide-to="2"></li>
-                </ol><!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="images/44287191gw1excbq6tb3rj21400migrz.jpg" alt="..." />
-                        <div class="carousel-caption">男人永远不会长大，只会变老</div>
-                    </div>
-                    <div class="item">
-                        <img src="images/44287191gw1excbq5iwm6j21400min3o.jpg" alt="..." />
-                        <div class="carousel-caption">欢迎来到简书</div>
-                    </div>
-                    <div class="item">
-                        <img src="images/44287191gw1excbq4kx57j21400migs4.jpg" alt="..." />
-                        <div class="carousel-caption">早上好！</div>
+    <!-- Page Header -->
+    <header id="post-header" class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="site-heading">
+                        <h1>多想 多看</h1>
+                        <br>
+                        <span class="subheading">我需要三件东西：爱情友谊和图书。然而这三者之间何其相通！炽热的爱情可以充实图书的内容，图书又是人们最忠实的朋友。</span>
                     </div>
                 </div>
-                <!-- Controls -->
-                <a class="left carousel-control" href="#carousel-example" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span></a>
-                <a class="right carousel-control" href="#carousel-example" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
         </div>
+    </header>
 
-        <div style="height: 20px;"></div>
-
-        <div>
-            @foreach($posts as $post)
-                <div class="blog-post">
-                    <h2 class="blog-post-title"><a href="/posts/{{ $post->id }}" >{{ $post->title }}</a></h2>
-                    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="/user/{{ $post->user->id }}">{{ $post->user->name }}</a></p>
-                    {!! str_limit($post->content, 100, '...') !!}
-                    <p class="blog-post-meta">赞 {{ $post->zans_count }}  | 评论 {{ $post->comments_count }}</p>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                @foreach($posts as $post)
+                <div class="post-preview">
+                    <a href="/posts/{{ $post->id }}">
+                        <h2 class="post-title">
+                            {{ $post->title }}
+                        </h2>
+                    </a>
+                    <br>
+                    <p class="post-meta">Posted by <a href="/user/{{ $post->user->id }}">{{ $post->user->name }}</a> on {{ $post->created_at->toFormattedDateString() }}</p>
+                    <h3 class="post-subtitle">
+                        {!! str_limit($post->content, 200, '...') !!}
+                    </h3>
+                    <p class="post-meta">Star {{ $post->zans_count }}  | Comment {{ $post->comments_count }}</p>
                 </div>
-            @endforeach
+                <hr>
+                @endforeach
 
-            {{ $posts->links() }}
-
-        </div><!-- /.blog-main -->
+                {{ $posts->links() }}
+            </div>
+        </div>
     </div>
+
+    <hr>
 @endsection

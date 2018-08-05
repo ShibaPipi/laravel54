@@ -1,0 +1,24 @@
+body a:hover{
+    text-decoration: none;
+}
+.navbar-toggler {
+    z-index: 1;
+}
+
+#index-header {
+    background-image: url('../images/home-bg.jpg');
+}
+
+#post-header {
+    background-image: url('../images/post-bg.jpg');
+}
+
+#show-header {
+    background-image: url('../images/about-bg.jpg');
+}
+
+@media (max-width: 576px) {
+    nav > .container {
+        width: 100%;
+    }
+}

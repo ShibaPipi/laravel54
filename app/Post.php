@@ -70,6 +70,18 @@ class Post extends Model
         });
     }
 
+    // 获取上一篇文章的 id
+    public function getPrevArticleId($id)
+    {
+        return $this->where('id', '<', $id)->max('id');
+    }
+
+    // 获取下一篇文章的 id
+    public function getNextArticleId($id)
+    {
+        return $this->where('id', '>', $id)->max('id');
+    }
+
     // 全局scope的方式
     protected static function boot()
     {

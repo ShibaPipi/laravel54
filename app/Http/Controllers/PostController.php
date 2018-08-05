@@ -15,13 +15,16 @@ class PostController extends Controller
 //        dd(\Request::all());
 //        $user = Auth::user();
         $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'zans'])->paginate(6);
-        return view("post/index", compact('posts', 'user'));
+        return view('post/index', compact('posts', 'user'));
     }
 
     //  文章详情
     public function show(Post $post)
     {
         $post->load('comments');
+        $post->prevId = $post->getPrevArticleId($post->id);
+        $post->nextId = $post->getNextArticleId($post->id);
+
         return view('post/show', compact('post'));
     }
 
@@ -144,6 +147,11 @@ class PostController extends Controller
 
         $posts = Post::search($query)->paginate(5);
         return view('post/search', compact('posts', 'query'));
+    }
+
+    private function score()
+    {
+        $sql = 'SELECT t1.teamName, m.matchResult, t2.teamName, m.matchTime FROM match AS m LEFT JOIN team AS t1 ON m.hostTeamID = t1.teamID, LEFT JOIN team AS t2 ON m.guestTeamID = t2.teamID WHERE m.matchTime BETWEEN 2006-6-1 AND 2006-7-1';
     }
 
 }
