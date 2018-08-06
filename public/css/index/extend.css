@@ -1,0 +1,18 @@
+.user-profile {
+    font-size: large;
+    left: 16px;
+    position: absolute;
+    width: 180px;
+    text-align: center;
+    background: none;
+    display: none;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px 50px;
+    list-style: none;
+}
+
+.user-info:hover .user-profile {
+    display: block;
+}

@@ -151,7 +151,7 @@ class PostController extends Controller
 
     private function score()
     {
-        $sql = 'SELECT t1.teamName, m.matchResult, t2.teamName, m.matchTime FROM match AS m LEFT JOIN team AS t1 ON m.hostTeamID = t1.teamID, LEFT JOIN team AS t2 ON m.guestTeamID = t2.teamID WHERE m.matchTime BETWEEN 2006-6-1 AND 2006-7-1';
+        $sql = 'SELECT t1.teamName, m.matchResult, t2.teamName, m.matchTime FROM `match` AS m LEFT JOIN `team` AS t1 ON m.hostTeamID = t1.teamID, LEFT JOIN team AS t2 ON m.guestTeamID = t2.teamID WHERE m.matchTime BETWEEN "2006-6-1" AND "2006-7-1"';
     }
 
 }

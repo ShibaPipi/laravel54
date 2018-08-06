@@ -28,7 +28,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Your Website 2017. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                <p class="copyright text-muted">Copyright &copy; Laravel Blog 2018 By Shiba Pipi.</p>
             </div>
         </div>
     </div>
