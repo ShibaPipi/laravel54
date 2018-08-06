@@ -158,13 +158,13 @@
                     <div class="form-group">
                         <label for="inputName" class="col-lg-4 control-label"></label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" required autofocus>
+                            <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail" class="col-lg-4 control-label"></label>
                         <div class="col-lg-10">
-                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" required autofocus>
+                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" required>
                         </div>
                     </div>
                     <div class="form-group">
