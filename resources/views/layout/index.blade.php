@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('images/components/favicon.png') }}" title="Favicon">
 
-    <title>Clean Blog - Start Bootstrap Theme</title>
+    <title>Shiba Inu Pipi</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
