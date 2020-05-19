@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoticeController extends Controller
 {
@@ -12,7 +13,7 @@ class NoticeController extends Controller
     public function index()
     {
         // 获取我收到的消息
-        $user = \Auth::user();
+        $user = Auth::user();
 
         $notices = $user->notices;
 

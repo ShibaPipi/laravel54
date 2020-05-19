@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', '\App\Http\Controllers\IndexController@index');
 
 //  用户模块
@@ -22,7 +24,7 @@ Route::post('/register', '\App\Http\Controllers\RegisterController@register');
 //  登录页面
 Route::get('/login', '\App\Http\Controllers\LoginController@index');
 //  登录行为
-Route::post('/login', '\App\Http\Controllers\LoginController@login');
+Route::post('/login', '\App\Http\Controllers\LoginController@login')->name('login');
 //  登出行为
 Route::get('/logout', '\App\Http\Controllers\LoginController@logout');
 

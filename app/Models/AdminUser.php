@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -13,7 +13,7 @@ class AdminUser extends Authenticatable
     // 用户有哪一些角色
     public function roles()
     {
-        return $this->belongsToMany(\App\AdminRole::class, 'admin_role_user', 'user_id', 'role_id')->withPivot(['user_id', 'role_id']);
+        return $this->belongsToMany(AdminRole::class, 'admin_role_user', 'user_id', 'role_id')->withPivot(['user_id', 'role_id']);
     }
 
     // 判断是否有某个角色，某些角色

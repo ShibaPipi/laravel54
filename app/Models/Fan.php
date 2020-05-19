@@ -1,8 +1,6 @@
 <?php
 
-namespace App;
-
-use App\Model;
+namespace App\Models;
 
 class Fan extends Model
 {
@@ -11,7 +9,7 @@ class Fan extends Model
      */
     public function fuser()
     {
-        return $this->hasOne(\App\User::class, 'id', 'fan_id');
+        return $this->hasOne(User::class, 'id', 'fan_id');
     }
 
     /*
@@ -19,6 +17,6 @@ class Fan extends Model
      */
     public function suser()
     {
-        return $this->hasOne(\App\User::class, 'id', 'star_id');
+        return $this->hasOne(User::class, 'id', 'star_id');
     }
 }

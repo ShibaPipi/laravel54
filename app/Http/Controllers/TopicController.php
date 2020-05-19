@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
-use App\PostTopic;
+use App\Models\Post;
+use App\Models\PostTopic;
 use Illuminate\Http\Request;
-use App\Topic;
+use App\Models\Topic;
+use Illuminate\Support\Facades\Auth;
 
 class TopicController extends Controller
 {
@@ -15,14 +16,14 @@ class TopicController extends Controller
     public function show(Topic $topic)
     {
         // 带文章数的专题
-        $topic = Topic::withCount('postTopics')->find($topic->id);
+        $topic = Topic::query()->withCount('postTopics')->find($topic->id);
 
         // 专题的文章列表，按照创建时间倒序排列，前10个
         $posts = $topic->posts()->orderBy('created_at', 'desc')->take(10)->get();
 //        $me = \Auth::user();
 
         //  是与我的文章，但是为投稿
-        $myposts = Post::authorBy(\Auth::id())->topicNotBy($topic->id)->get();
+        $myposts = Post::authorBy(Auth::id())->topicNotBy($topic->id)->get();
 
         return view('topic/show', compact('topic', 'posts', 'myposts'));
     }
@@ -47,7 +48,7 @@ class TopicController extends Controller
         $post_ids = request('post_ids');
         $topic_id = $topic->id;
         foreach ($post_ids as $post_id){
-            PostTopic::firstOrCreate(compact('topic_id', 'post_id'));
+            PostTopic::query()->firstOrCreate(compact('topic_id', 'post_id'));
         }
 
         return back();

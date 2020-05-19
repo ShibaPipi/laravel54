@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -27,7 +27,7 @@ class User extends Authenticatable
     // 文章列表
     public function posts()
     {
-        return $this->hasMany(\App\Post::class, 'user_id', 'id');
+        return $this->hasMany(Post::class, 'user_id', 'id');
     }
 
     /*
@@ -35,7 +35,7 @@ class User extends Authenticatable
      */
     public function fans()
     {
-        return $this->hasMany(\App\Fan::class, 'star_id', 'id');
+        return $this->hasMany(Fan::class, 'star_id', 'id');
     }
 
     /*
@@ -43,7 +43,7 @@ class User extends Authenticatable
      */
     public function stars()
     {
-        return $this->hasMany(\App\Fan::class, 'fan_id', 'id');
+        return $this->hasMany(Fan::class, 'fan_id', 'id');
     }
 
     // 关注某人

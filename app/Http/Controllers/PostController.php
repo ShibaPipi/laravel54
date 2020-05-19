@@ -2,33 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\Post;
-use App\Zan;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\Zan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     //  文章列表页面
     public function index()
     {
-//        dd(\Request::all());
-//        $user = Auth::user();
-        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'zans'])->paginate(6);
-        return view("post/index", compact('posts', 'user'));
+        $posts = Post::query()
+            ->with('user')
+            ->withCount(['comments', 'zans'])
+            ->latest()
+            ->paginate(6);
+//dd($posts);
+        return view('post.index', compact('posts'));
     }
 
     //  文章详情
     public function show(Post $post)
     {
         $post->load('comments');
-        return view('post/show', compact('post'));
+        return view('post.show', compact('post'));
     }
 
     //  创建文章
     public function create()
     {
-        return view('post/create');
+        return view('post.create');
     }
 
     //  创建逻辑
@@ -40,10 +44,10 @@ class PostController extends Controller
             'content' => 'required|min:10',
         ]);
 
-        $params = array_merge(request(['title', 'content']), ['user_id' => \Auth::id()]);
+        $params = array_merge(request(['title', 'content']), ['user_id' => Auth::id()]);
 
         //  逻辑
-        Post::create($params);
+        Post::query()->create($params);
 
         //  渲染
         return redirect('/posts');
@@ -52,7 +56,7 @@ class PostController extends Controller
     //  编辑逻辑
     public function edit(Post $post)
     {
-        return view("post/edit", compact('post'));
+        return view('post.edit', compact('post'));
     }
 
     public function update(Post $post)
@@ -91,9 +95,8 @@ class PostController extends Controller
 
     public function imageUpload(Request $request)
     {
-//        dd($request->all());
         $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
-        return asset('storage/'. $path);
+        return asset('storage/' . $path);
     }
 
     /*
@@ -101,13 +104,13 @@ class PostController extends Controller
      */
     public function comment(Post $post)
     {
-        $this->validate(request(),[
+        $this->validate(request(), [
 //            'post_id' => 'required|exists:posts,id',
             'content' => 'required|min:2',
         ]);
 
         $comment = new Comment();
-        $comment->user_id = \Auth::id();
+        $comment->user_id = Auth::id();
         $comment->content = request('content');
         $post->comments()->save($comment);
 
@@ -116,18 +119,17 @@ class PostController extends Controller
 
     public function zan(Post $post)
     {
-        $param = [
-            'user_id' => \Auth::id(),
+        Zan::query()->firstOrCreate([
+            'user_id' => Auth::id(),
             'post_id' => $post->id,
-        ];
+        ]);
 
-        Zan::firstOrCreate($param);
         return back();
     }
 
     public function unzan(Post $post)
     {
-        $post->zan(\Auth::id())->delete();
+        $post->zan(Auth::id())->delete();
         return back();
     }
 
@@ -136,14 +138,14 @@ class PostController extends Controller
      */
     public function search()
     {
-        $this->validate(request(),[
+        $this->validate(request(), [
             'query' => 'required'
         ]);
 
         $query = request('query');
 
         $posts = Post::search($query)->paginate(5);
-        return view('post/search', compact('posts', 'query'));
+        return view('post.search', compact('posts', 'query'));
     }
 
 }

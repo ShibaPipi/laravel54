@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -25,7 +25,7 @@ class RegisterController extends Controller
         $name = request('name');
         $email = request('email');
         $password = bcrypt(request('password'));
-        $user = User::create(compact('name', 'email', 'password'));
+        $user = User::query()->create(compact('name', 'email', 'password'));
 
         //  渲染
         return redirect('/login');

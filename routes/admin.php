@@ -1,10 +1,12 @@
 <?php
 
 // 管理后台
+use Illuminate\Support\Facades\Route;
+
 Route::group(['prefix' => 'admin'], function() {
 
     // 登录展示页面
-    Route::get('/login', '\App\Admin\Controllers\LoginController@index');
+    Route::get('/login', '\App\Admin\Controllers\LoginController@index')->name('admin.login');
     // 登录行为
     Route::post('/login', '\App\Admin\Controllers\LoginController@login');
     // 登出行为

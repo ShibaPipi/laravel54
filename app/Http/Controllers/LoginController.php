@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,17 +26,17 @@ class LoginController extends Controller
         //  逻辑
         $user = request(['email', 'password']);
         $is_remember = boolval(request('is_remember'));
-        if (\Auth::attempt($user, $is_remember)) {
+        if (Auth::attempt($user, $is_remember)) {
             return redirect('/posts');
         }
         //  渲染
-        return \Redirect::back()->withErrors("用户名密码错误");
+        return back()->withErrors("用户名密码错误");
     }
 
     //  登出行为
     public function logout()
     {
-        \Auth::logout();
+        Auth::logout();
         return redirect('/login');
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-namespace App;
-
-use App\Model;
+namespace App\Models;
 
 class Notice extends Model
 {
